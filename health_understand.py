@@ -14,11 +14,6 @@ settings = {
 
 smart = client.FHIRClient(settings=settings)
 
-with open('fhir/Alejandra902_Villa94_63056f6b-4cb3-4f9b-9a62-c3817991e6a1.json', 'r') as f:
-    bundle_json = json.load(f)
-
-# Parse the Bundle using the FHIR client
-entries = bundle_json['entry']
 
 os.environ["OPENAI_API_KEY"] = "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"
 
