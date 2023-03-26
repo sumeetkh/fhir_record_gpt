@@ -1,3 +1,11 @@
+## Disclaimer
+
+This work is not meant to be used in it's current form - it's a demo app. Medical
+records, histories and recommendations should be used carefully. While AI systems will
+provide a lt of utility and value generation in these areas - there are a lot of potential harms 
+and possibilities of misuse. This work requires more iterations before it can be used.
+
+
 ## fhir_record_gpt
 
 - Use requirements.py to build a local environment
