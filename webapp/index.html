@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/vis-network@7.11.3/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/vis-network@7.11.3/dist/vis-network.min.js"></script>
+  <title>Simple Frontend</title>
+</head>
+<body>
+  <form id="input-form">
+    <label for="file-name">File Name:</label>
+    <input size="120", type="text" id="file-name" name="file-name" required>
+    <br><br>
+    <label for="question">Question:</label>
+    <input size="120", type="text" id="question" name="question" required>
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <br>
+  <textarea id="response-area" rows="10" cols="50" readonly></textarea>
+  <div id="graphContainer" style="width: 800px; height: 400px;"></div>
+
+
+  <script>
+    document.getElementById('input-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const fileName = document.getElementById('file-name').value;
+      const question = document.getElementById('question').value;
+      const responseArea = document.getElementById('response-area');
+
+      const requestData = {
+        file_name: fileName,
+        question: question,
+      };
+
+      try {
+        const response = await fetch('http://localhost:5001/api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          responseArea.value = responseData.answer;
+        } else {
+          responseArea.value = 'Error: ' + response.statusText;
+        }
+      } catch (error) {
+        responseArea.value = 'Error: ' + error;
+      }
+    });
+  </script>
+
+<script>
+    function renderGraph(data) {
+      var container = document.getElementById('graphContainer');
+      var options = {
+        // Customize graph options here
+      };
+      var network = new vis.Network(container, data, options);
+    }
+  </script>
+</body>
+</html>
