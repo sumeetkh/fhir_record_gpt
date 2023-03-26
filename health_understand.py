@@ -15,7 +15,7 @@ settings = {
 smart = client.FHIRClient(settings=settings)
 
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "<Key>"
 
 template_text = """
 You are an intelligent tool capable of deeply understanding FHIR records. You can
